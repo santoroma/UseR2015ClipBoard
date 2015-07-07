@@ -178,7 +178,7 @@ m_hours_countries <- counts_by_country %>%
   arrange(hour, country) %>%
   acast(hour ~ country, value.var = 'n', fill = 0)
 ```
-Scaricamenti prari di pacchetti R per nazione
+Scaricamenti orari di pacchetti R per nazione
 ```{r,}
 m_hours_countries[1:4,1:10]
 ```
