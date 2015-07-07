@@ -1,0 +1,17 @@
+{
+    "contents" : "// [[Rcpp::depends(RcppParallel)]]\n#include <RcppParallel.h>\n#include <Rcpp.h>\nusing namespace RcppParallel;\n\nstruct Sum : public Worker\n{   \n  // source vector\n  const RVector<double> input;\n  \n  // accumulated value\n  double value;\n  \n  // constructors\n  Sum(const Rcpp::NumericVector input) : input(input), value(0) {}\n  Sum(const Sum& sum, Split) : input(sum.input), value(0) {}\n  \n  // accumulate just the element of the range I've been asked to\n  void operator()(std::size_t begin, std::size_t end) {\n    value += std::accumulate(input.begin() + begin, input.begin() + end, 0.0);\n  }\n  \n  // join my value with that of another Sum\n  void join(const Sum& rhs) { \n    value += rhs.value; \n  }\n};\nusing namespace RcppParallel;\n// [[Rcpp::export]]\ndouble parallelVectorSum(Rcpp::NumericVector x) {\n  \n  // declare the SumBody instance \n  Sum sum(x);\n  \n  // call parallel_reduce to start the work\n  parallelReduce(0, x.length(), sum);\n  \n  // return the computed sum\n  return sum.value;\n}",
+    "created" : 1436261987720.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "456612413",
+    "id" : "2D88638F",
+    "lastKnownWriteTime" : 1436183924,
+    "path" : "~/UseR2015/UseR2015ClipBoard/foo_par.cpp",
+    "project_path" : "foo_par.cpp",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "cpp"
+}

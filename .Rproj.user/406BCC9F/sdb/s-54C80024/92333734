@@ -1,0 +1,17 @@
+{
+    "contents" : "#include <Rcpp.h>\nusing namespace Rcpp;\n\n#include <algorithm>\n\n// [[Rcpp::export]]\ndouble vectorSum(NumericVector x) {\n  return std::accumulate(x.begin(), x.end(), 0.0);\n}",
+    "created" : 1436261988691.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3684470150",
+    "id" : "92333734",
+    "lastKnownWriteTime" : 1436183456,
+    "path" : "~/UseR2015/UseR2015ClipBoard/foo_ser.cpp",
+    "project_path" : "foo_ser.cpp",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "cpp"
+}
